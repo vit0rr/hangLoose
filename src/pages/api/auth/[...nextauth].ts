@@ -13,7 +13,6 @@ export const authOptions = {
         async signIn(params) {
             const { email, name } = params.user
 
-            console.log("nicolas")
             fetch(`${process.env.NEXT_PUBLIC_API}/api/createUser`, {
                 method: "POST",
                 headers: {
