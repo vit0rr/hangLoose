@@ -1,17 +1,31 @@
 import LoginButton from '@/components/LoginButton/LoginButton'
-import { useSession } from 'next-auth/react'
+import { GetServerSidePropsContext, NextPage } from 'next';
+import { signIn, useSession } from 'next-auth/react'
+import { getServerAuthSession } from './api/auth/[...nextauth]';
 
-export default function Home() {
-  const { data: session } = useSession()
-
+const Home: NextPage = () => {
   return (
-    <>
-      {session && (
-        <>
-          <h1>Logged in as {session.user?.name}</h1>
-        </>
-      )}
-      <LoginButton />
-    </>
+    <main>
+      <button onClick={() => signIn("github")}>loga ai fera</button>
+    </main>
   )
+};
+
+export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+  const session = await getServerAuthSession(ctx)
+
+  if(!session?.user) {
+    return { props: {} }
+  }
+
+  return {
+    redirect: {
+      destination: '/hang-loose',
+      permanent: false
+    },
+    props: {}
+  }
 }
+
+export default Home;
+

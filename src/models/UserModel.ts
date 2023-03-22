@@ -1,18 +1,18 @@
 import mongoose from "mongoose";
 
 const Schema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-    },
-    email: {
+    githubId: {
         type: String,
         required: true,
         unique: true,
     },
+    name: {
+        type: String,
+        required: true,
+    },
     avatar: {
         type: String,
-        required: false,
+        required: true,
     },
     hasHangloose: {
         type: Boolean,
@@ -22,10 +22,9 @@ const Schema = new mongoose.Schema({
 
 export interface IUser extends mongoose.Document {
     name: string;
-    email: string;
     avatar?: string;
     hasHangloose?: boolean;
 }
 
-const UserModel = mongoose.model<IUser>('User', Schema);
+const UserModel = mongoose.models.User || mongoose.model<IUser>('User', Schema);
 export default UserModel;

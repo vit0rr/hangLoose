@@ -1,4 +1,5 @@
-import NextAuth from "next-auth"
+import { GetServerSidePropsContext } from "next"
+import NextAuth, { getServerSession } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
 export const authOptions = {
@@ -10,8 +11,9 @@ export const authOptions = {
     ],
     callbacks: {
         // @ts-ignore
-        async signIn(params) {
-            const { email, name, image } = params.user
+        async session({session}) {
+            const { email, name, image } = session.user
+            
             if (!email) {
                 return false
             }
@@ -29,10 +31,18 @@ export const authOptions = {
             }).catch((e) => {
                 console.log(e)
             })
-            return true
+
+            return session
         }
     },
     secret: process.env.SECRET as string,
 }
+
+export const getServerAuthSession = (ctx: {
+    req: GetServerSidePropsContext["req"];
+    res: GetServerSidePropsContext["res"];
+  }) => {
+    return getServerSession(ctx.req, ctx.res, authOptions);
+  };
 
 export default NextAuth(authOptions)
