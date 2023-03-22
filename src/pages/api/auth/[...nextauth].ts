@@ -10,8 +10,12 @@ export const authOptions = {
     ],
     callbacks: {
         // @ts-ignore
-        async session({session}) {
-            const { email, name, image } = session.user
+        async signIn(params) {
+            const { email, name, image } = params.user
+            if (!email) {
+                return false
+            }
+
             fetch(`${process.env.NEXT_PUBLIC_API}/api/createUser`, {
                 method: "POST",
                 headers: {
@@ -25,8 +29,8 @@ export const authOptions = {
             }).catch((e) => {
                 console.log(e)
             })
-            return session
-        } 
+            return true
+        }
     },
     secret: process.env.SECRET as string,
 }
