@@ -52,6 +52,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
         return { props: { hangLooses } }   
     } catch (error) {
         console.log(error)
-        return { props: { hangLooses: [] } }
+        return {
+            redirect: {
+                destination: '/',
+                permanent: false
+            },
+            props: {}
+        }
     }
 }
