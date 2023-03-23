@@ -45,7 +45,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     console.log("githubId", githubId)
     try {
         console.log("before find")
-        UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } })
+        await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } })
 
         console.log("after find")
 

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { Model } from "mongoose";
 
 const Schema = new mongoose.Schema({
     githubId: {
@@ -26,5 +26,5 @@ export interface IUser extends mongoose.Document {
     hasHangloose?: boolean;
 }
 
-const UserModel = mongoose.models.User || mongoose.model<IUser>('User', Schema);
+const UserModel: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', Schema);
 export default UserModel;
