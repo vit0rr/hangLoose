@@ -12,11 +12,8 @@ export const authOptions = {
     callbacks: {
         // @ts-ignore
         async session({session}) {
-            const { email, name, image } = session.user
-            
-            if (!email) {
-                return false
-            }
+            const { name, image } = session.user
+
 
             fetch(`${process.env.NEXT_PUBLIC_API}/api/createUser`, {
                 method: "POST",
@@ -25,7 +22,6 @@ export const authOptions = {
                 },
                 body: JSON.stringify({
                     name,
-                    email,
                     avatar: image,
                 }),
             }).catch((e) => {

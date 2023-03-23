@@ -5,15 +5,12 @@ import { getGithubId } from "@/utils/getGithubId";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
-        const { name, email, avatar } = req.body;
-        if (!email) {
-            return res.status(400).json({ message: 'Email is required' });
-        }
+        const { name, avatar } = req.body;
 
         const githubId = getGithubId(avatar);
 
         try {
-            const newUser = await UserModel.create({ githubId, name, email, avatar, hasHangloose: false });
+            const newUser = await UserModel.create({ githubId, name, avatar, hasHangloose: false });
             return res.status(200).json(newUser);
 
         } catch (error) {

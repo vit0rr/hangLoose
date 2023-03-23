@@ -10,7 +10,6 @@ interface HangLooseUser {
     githubId: string;
     name: string;
     avatar: string;
-    email: string;
     hasHangloose: boolean;
 }
 
