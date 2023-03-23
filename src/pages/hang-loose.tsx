@@ -30,7 +30,7 @@ export default function HangLoose({hangLooses: hangLooses}: {hangLooses: HangLoo
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     const session = await getServerAuthSession(ctx)
-
+    console.log("session", session)
     if (!session?.user) {
         return {
             redirect: {
@@ -42,12 +42,17 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     }
 
     const githubId = getGithubId(session.user.image)
+    console.log("githubId", githubId)
     try {
+        console.log("before find")
         await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } }, {
             upsert: true
-        }).lean()
+        })
+
+        console.log("after find")
     
         const hangLooses: HangLooseUser[] = await UserModel.find({ hasHangloose: true }).lean()
+        console.log("hangLooses", hangLooses)
     
         return { props: { hangLooses } }   
     } catch (error) {
