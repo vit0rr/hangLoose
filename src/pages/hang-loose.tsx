@@ -2,6 +2,7 @@ import UserModel from "@/models/UserModel";
 import { getGithubId } from "@/utils/getGithubId";
 import { GetServerSidePropsContext } from "next";
 import { signOut } from "next-auth/react";
+import { connectMongo } from "../../middleware/mongodb";
 import { getServerAuthSession } from "./api/auth/[...nextauth]";
 
 interface HangLooseUser {
@@ -29,8 +30,9 @@ export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: Hang
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
+    await connectMongo()
     const session = await getServerAuthSession(ctx)
-    console.log("session", session)
+    
     if (!session?.user) {
         return {
             redirect: {

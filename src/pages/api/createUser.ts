@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import UserModel from "@/models/UserModel";
-import connectDB from "../../../middleware/mongodb";
+import {connectMongoMiddleware} from "../../../middleware/mongodb";
 import { getGithubId } from "@/utils/getGithubId";
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
@@ -26,4 +26,4 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 }
 
-export default connectDB(handler);
+export default connectMongoMiddleware(handler);
