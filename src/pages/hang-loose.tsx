@@ -11,18 +11,18 @@ interface HangLooseUser {
     avatar: string;
     email: string;
     hasHangloose: boolean;
-  }
+}
 
-export default function HangLoose({hangLooses: hangLooses}: {hangLooses: HangLooseUser[]}) {
+export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: HangLooseUser[] }) {
     return (
         <main>
             <h1>Hang Looses</h1>
             <ul>
-            {hangLooses.map((u) => <li key={u.githubId} style={{display: 'flex', alignItems: "center"}}>
-                <img src={u.avatar} style={{width: "48px", height: "48px"}}/>
-                <span>{u.name} 🤙</span>
+                {hangLooses.map((u) => <li key={u.githubId} style={{ display: 'flex', alignItems: "center" }}>
+                    <img src={u.avatar} style={{ width: "48px", height: "48px" }} />
+                    <span>{u.name} 🤙</span>
                 </li>)}
-        </ul>
+            </ul>
             <button onClick={() => signOut()}>Meter o pé</button>
         </main>
     )
@@ -45,16 +45,14 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     console.log("githubId", githubId)
     try {
         console.log("before find")
-        await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } }, {
-            upsert: true
-        })
+        await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } })
 
         console.log("after find")
-    
+
         const hangLooses: HangLooseUser[] = await UserModel.find({ hasHangloose: true }).lean()
         console.log("hangLooses", hangLooses)
-    
-        return { props: { hangLooses } }   
+
+        return { props: { hangLooses } }
     } catch (error) {
         console.log(error)
         return {
