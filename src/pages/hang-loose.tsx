@@ -42,11 +42,16 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     }
 
     const githubId = getGithubId(session.user.image)
-    await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } }, {
-        upsert: true
-    }).lean()
-
-    const hangLooses: HangLooseUser[] = await UserModel.find({ hasHangloose: true }).lean()
-
-    return { props: { hangLooses } }
+    try {
+        await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } }, {
+            upsert: true
+        }).lean()
+    
+        const hangLooses: HangLooseUser[] = await UserModel.find({ hasHangloose: true }).lean()
+    
+        return { props: { hangLooses } }   
+    } catch (error) {
+        console.log(error)
+        return { props: { hangLooses: [] } }
+    }
 }
