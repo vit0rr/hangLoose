@@ -1,6 +1,9 @@
+import UserModel from "@/models/UserModel"
+import { getGithubId } from "@/utils/getGithubId"
 import { GetServerSidePropsContext } from "next"
 import NextAuth, { getServerSession } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
+import { connectMongo } from "../../../../middleware/mongodb"
 
 export const authOptions = {
     providers: [
@@ -12,21 +15,17 @@ export const authOptions = {
     callbacks: {
         // @ts-ignore
         async session({session}) {
+            await connectMongo()
             const { name, image } = session.user
 
-
-            fetch(`${process.env.NEXT_PUBLIC_API}/api/createUser`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    name,
-                    avatar: image,
-                }),
-            }).catch((e) => {
-                console.log(e)
-            })
+            const githubId = getGithubId(image);
+            try {
+                await UserModel.create({ githubId, name, avatar: image, hasHangloose: false });
+            } catch (error) {
+                if (error) {
+                    console.log(error)
+                }
+            }
 
             return session
         }
