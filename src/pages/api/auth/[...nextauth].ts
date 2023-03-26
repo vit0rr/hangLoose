@@ -26,7 +26,7 @@ export const authOptions = {
                         githubId,
                         name,
                         avatar: image,
-                        hasHangloose: false,
+                        hasHangloose: true,
                     });
                 }
                 return session;
