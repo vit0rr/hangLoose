@@ -14,21 +14,27 @@ export const authOptions = {
     ],
     callbacks: {
         // @ts-ignore
-        async session({session}) {
-            await connectMongo()
-            const { name, image } = session.user
-
+        async session({ session }) {
+            await connectMongo();
+            const { name, image } = session.user;
             const githubId = getGithubId(image);
-            try {
-                await UserModel.create({ githubId, name, avatar: image, hasHangloose: false });
-            } catch (error) {
-                if (error) {
-                    console.log(error)
-                }
-            }
 
-            return session
-        }
+            try {
+                let user = await UserModel.findOne({ githubId });
+                if (!user) {
+                    user = await UserModel.create({
+                        githubId,
+                        name,
+                        avatar: image,
+                        hasHangloose: false,
+                    });
+                }
+                return session;
+            } catch (error) {
+                console.log(error);
+                return session;
+            }
+        },
     },
     secret: process.env.SECRET as string,
 }
@@ -36,8 +42,8 @@ export const authOptions = {
 export const getServerAuthSession = (ctx: {
     req: GetServerSidePropsContext["req"];
     res: GetServerSidePropsContext["res"];
-  }) => {
+}) => {
     return getServerSession(ctx.req, ctx.res, authOptions);
-  };
+};
 
 export default NextAuth(authOptions)

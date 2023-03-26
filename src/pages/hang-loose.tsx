@@ -29,39 +29,53 @@ export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: Hang
 }
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
-    await connectMongo()
-    const session = await getServerAuthSession(ctx)
-    
+    await connectMongo();
+    const session = await getServerAuthSession(ctx);
+
     if (!session?.user) {
         return {
             redirect: {
                 destination: '/',
-                permanent: false
+                permanent: false,
             },
-            props: {}
-        }
+            props: {},
+        };
     }
 
-    const githubId = getGithubId(session.user.image)
-    console.log("githubId", githubId)
+    const githubId = getGithubId(session.user.image);
     try {
-        console.log("before find")
-        await UserModel.findOneAndUpdate({ githubId }, { $set: { hasHangloose: true } })
-
-        console.log("after find")
-
-        const hangLooses: HangLooseUser[] = await UserModel.find({ hasHangloose: true }).lean()
-        console.log("hangLooses", hangLooses)
-
-        return { props: { hangLooses } }
+        const user = await UserModel.findOne({ githubId });
+        if (!user) {
+            console.log("User not found");
+            return {
+                redirect: {
+                    destination: '/',
+                    permanent: false,
+                },
+                props: {},
+            };
+        }
+    
+        if (!user.hasHangloose) {
+            await UserModel.updateOne({ githubId }, { $set: { hasHangloose: true } });
+        }
+    
+        const hangLooses = (await UserModel.find({ hasHangloose: true }).lean()).map((user) => {
+            return {
+                ...user,
+                _id: user._id.toString(),
+            };
+        });
+    
+        return { props: { hangLooses } };
     } catch (error) {
-        console.log(error)
+        console.log(error);
         return {
             redirect: {
                 destination: '/',
-                permanent: false
+                permanent: false,
             },
-            props: {}
-        }
+            props: {},
+        };
     }
 }
