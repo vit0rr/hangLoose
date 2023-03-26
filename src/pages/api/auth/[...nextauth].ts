@@ -1,5 +1,4 @@
 import UserModel from "@/models/UserModel"
-import { getGithubId } from "@/utils/getGithubId"
 import { GetServerSidePropsContext } from "next"
 import NextAuth, { getServerSession } from "next-auth"
 import GithubProvider from "next-auth/providers/github"
@@ -14,38 +13,28 @@ export const authOptions = {
     ],
     callbacks: {
         // @ts-ignore
-        async session({ session }) {
+        async signIn({ profile }) {
             await connectMongo();
-            const { name, image, email } = session.user;
-            const githubId = getGithubId(image);
-            console.log("callbacks.githubId", githubId)
-            console.log("callbacks.session.user", {
-                name,
-                image,
-                email
-            })
-
+            const {name, avatar_url, html_url, email, id } = profile;
+            await connectMongo();
             try {
-                let user = await UserModel.findOne({ githubId });
-                console.log("callbacks.session.user", user)
+                let user = await UserModel.findOne({ githubId: id });
                 if (!user) {
-                    console.log("callbacks.session.user.if -> do not have user",)
                     user = await UserModel.create({
-                        githubId,
+                        githubId: id,
                         name,
-                        avatar: image,
-                        email: email ? email : githubId + " do not have email",
+                        avatar: avatar_url,
+                        email: email ? email : id + " do not have email",
+                        userUrl: html_url,
                         hasHangloose: true,
                     });
-
-                    console.log("callbacks.session.user.if", user)
                 }
-                return session;
+                return true;
             } catch (error) {
                 console.log(error);
-                return session;
+                return false;
             }
-        },
+         },
     },
     secret: process.env.SECRET as string,
 }
@@ -57,4 +46,4 @@ export const getServerAuthSession = (ctx: {
     return getServerSession(ctx.req, ctx.res, authOptions);
 };
 
-export default NextAuth(authOptions)
+export default NextAuth(authOptions as any)

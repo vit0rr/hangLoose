@@ -21,6 +21,10 @@ const Schema = new mongoose.Schema({
     email: {
         type: String,
         required: false,
+    },
+    userUrl: {
+        type: String,
+        required: false,
     }
 })
 

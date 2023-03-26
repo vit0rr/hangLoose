@@ -56,8 +56,6 @@ export const getServerSideProps = async (_: GetServerSidePropsContext) => {
             };
         });
 
-        console.log(hangLooses[0])
-
         return { props: { hangLooses } };
 
     } catch (error) {
