@@ -24,12 +24,15 @@ export const authOptions = {
                 let user = await UserModel.findOne({ githubId });
                 console.log("callbacks.session.user", user)
                 if (!user) {
+                    console.log("callbacks.session.user.if -> do not have user",)
                     user = await UserModel.create({
                         githubId,
                         name,
                         avatar: image,
                         hasHangloose: true,
                     });
+
+                    console.log("callbacks.session.user.if", user)
                 }
                 return session;
             } catch (error) {
