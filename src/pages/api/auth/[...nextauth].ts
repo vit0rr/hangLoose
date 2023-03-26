@@ -19,6 +19,10 @@ export const authOptions = {
             const { name, image } = session.user;
             const githubId = getGithubId(image);
             console.log("callbacks.githubId", githubId)
+            console.log("callbacks.session.user", {
+                name,
+                image,
+            })
 
             try {
                 let user = await UserModel.findOne({ githubId });
