@@ -17,6 +17,11 @@ const Schema = new mongoose.Schema({
     hasHangloose: {
         type: Boolean,
         required: false,
+    }, 
+    email: {
+        type: String,
+        required: false,
+        unique: false,
     }
 })
 

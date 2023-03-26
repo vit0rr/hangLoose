@@ -16,12 +16,13 @@ export const authOptions = {
         // @ts-ignore
         async session({ session }) {
             await connectMongo();
-            const { name, image } = session.user;
+            const { name, image, email } = session.user;
             const githubId = getGithubId(image);
             console.log("callbacks.githubId", githubId)
             console.log("callbacks.session.user", {
                 name,
                 image,
+                email
             })
 
             try {
@@ -33,6 +34,7 @@ export const authOptions = {
                         githubId,
                         name,
                         avatar: image,
+                        email,
                         hasHangloose: true,
                     });
 
