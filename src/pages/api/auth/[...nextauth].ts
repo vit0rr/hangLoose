@@ -34,7 +34,7 @@ export const authOptions = {
                         githubId,
                         name,
                         avatar: image,
-                        email,
+                        email: email ? email : githubId + " do not have email",
                         hasHangloose: true,
                     });
 
