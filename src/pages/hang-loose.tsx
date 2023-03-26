@@ -1,11 +1,9 @@
 import UserModel from "@/models/UserModel";
-import { getGithubId } from "@/utils/getGithubId";
 import { GetServerSidePropsContext } from "next";
 import { signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { connectMongo } from "../../middleware/mongodb";
-import { getServerAuthSession } from "./api/auth/[...nextauth]";
 
 interface HangLooseUser {
     _id: string;
