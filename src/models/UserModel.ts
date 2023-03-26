@@ -21,8 +21,6 @@ const Schema = new mongoose.Schema({
     email: {
         type: String,
         default: "not_provided",
-        required: false,
-        unique: false,
     }
 })
 
