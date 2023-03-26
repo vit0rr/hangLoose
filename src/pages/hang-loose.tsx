@@ -46,6 +46,7 @@ export const getServerSideProps = async (_: GetServerSidePropsContext) => {
     await connectMongo();
 
     try {
+        // @ts-ignore
         const hangLooses: HangLooseUser[] = (
             await UserModel.find({ hasHangloose: true }).lean()
         ).map((user) => {
