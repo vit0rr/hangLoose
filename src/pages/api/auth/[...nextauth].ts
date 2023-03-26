@@ -18,9 +18,11 @@ export const authOptions = {
             await connectMongo();
             const { name, image } = session.user;
             const githubId = getGithubId(image);
+            console.log("callbacks.githubId", githubId)
 
             try {
                 let user = await UserModel.findOne({ githubId });
+                console.log("callbacks.session.user", user)
                 if (!user) {
                     user = await UserModel.create({
                         githubId,
