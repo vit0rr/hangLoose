@@ -14,17 +14,17 @@ const Home: NextPage = () => {
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const session = await getServerAuthSession(ctx)
 
-  if(!session?.user) {
-    return { props: {} }
+  if (session?.user) {
+    return {
+      redirect: {
+        destination: '/hang-loose',
+        permanent: false,
+      },
+      props: {},
+    };
   }
 
-  return {
-    redirect: {
-      destination: '/hang-loose',
-      permanent: false
-    },
-    props: {}
-  }
+  return { props: {} };
 }
 
 export default Home;

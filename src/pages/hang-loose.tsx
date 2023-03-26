@@ -55,18 +55,18 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
                 props: {},
             };
         }
-    
+
         if (!user.hasHangloose) {
             await UserModel.updateOne({ githubId }, { $set: { hasHangloose: true } });
         }
-    
+
         const hangLooses = (await UserModel.find({ hasHangloose: true }).lean()).map((user) => {
             return {
                 ...user,
                 _id: user._id.toString(),
             };
         });
-    
+
         return { props: { hangLooses } };
     } catch (error) {
         console.log(error);
