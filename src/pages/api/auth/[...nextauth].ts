@@ -30,14 +30,16 @@ export const authOptions = {
                     });
                 }
 
-                await UserModel.findOneAndUpdate({
-                    githubId: id,
-                }, {
-                    name,
-                    avatar: avatar_url,
-                    email: email ? email : id + " do not have email",
-                    userUrl: html_url,
-                })
+                if (user) {
+                    await UserModel.findOneAndUpdate({
+                        githubId: id,
+                    }, {
+                        name,
+                        avatar: avatar_url,
+                        email: email ? email : id + " do not have email",
+                        userUrl: html_url,
+                    })
+                }
                 return true;
             } catch (error) {
                 console.log(error);
