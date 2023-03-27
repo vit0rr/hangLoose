@@ -1,0 +1,32 @@
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  font-family: Arial, sans-serif;
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #666;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #999;
+}
+
+@media (max-width: 768px) {
+  .main {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+}

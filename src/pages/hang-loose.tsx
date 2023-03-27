@@ -1,3 +1,5 @@
+import styles from '@/styles/hangloose.module.css'
+
 import UserModel from "@/models/UserModel";
 import { GetServerSidePropsContext } from "next";
 import { signOut, useSession } from "next-auth/react";
@@ -11,6 +13,7 @@ interface HangLooseUser {
     name: string;
     avatar: string;
     hasHangloose: boolean;
+    userUrl: string;
 }
 
 export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: HangLooseUser[] }) {
@@ -25,17 +28,23 @@ export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: Hang
     }, [status, router]);
 
     return (
-        <main>
-            <h1>Hang Looses</h1>
-            <ul>
+        <main className={styles.main}>
+            <h1 className={styles.h1}>Hang Looses</h1>
+            <ul className={styles.ul}>
                 {hangLooses.map((u) => (
-                    <li key={u.githubId} style={{ display: 'flex', alignItems: 'center' }}>
-                        <img src={u.avatar} style={{ width: '48px', height: '48px' }} />
-                        <span>{u.name} 🤙</span>
+                    <li key={u.githubId} className={styles.li}>
+                        <img src={u.avatar} className={styles.img} />
+                        {
+                            u.userUrl ? (
+                                <span><a href={u.userUrl} target={"_blank"} className={styles.a}>{u.name} </a> 🤙</span>
+                            ) : (
+                                <span>{u.name} 🤙</span>
+                            )
+                        }
                     </li>
                 ))}
             </ul>
-            <button onClick={() => signOut()}>Meter o pé</button>
+            <button onClick={() => signOut()} className={styles.button}>Sign Out</button>
         </main>
     );
 }

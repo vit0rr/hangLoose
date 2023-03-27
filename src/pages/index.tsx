@@ -1,4 +1,5 @@
-import LoginButton from '@/components/LoginButton/LoginButton'
+import styles from '@/styles/home.module.css'
+
 import { GetServerSidePropsContext, NextPage } from 'next';
 import { signIn, useSession } from 'next-auth/react'
 import { useRouter } from 'next/router';
@@ -17,8 +18,8 @@ const Home: NextPage = () => {
   }, [status, router]);
 
   return (
-    <main>
-      <button onClick={() => signIn("github")}>loga ai fera</button>
+    <main className={styles.main}>
+      <button onClick={() => signIn("github")} className={styles.button}>Sign In with Github</button>
     </main>
   )
 };
