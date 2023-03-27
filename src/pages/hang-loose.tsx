@@ -20,6 +20,8 @@ export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: Hang
     const { data: session, status } = useSession();
     const router = useRouter();
 
+    const tweetMessage = `Hey! I just signed up for HangLoose! It's a new way to connect with other developers. Check it out! https://hangloose.vercel.app`;
+
     // Redirect to '/' if the user is not logged in.
     useEffect(() => {
         if (status === 'unauthenticated') {
@@ -33,6 +35,9 @@ export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: Hang
             <button onClick={() => signOut()} className={styles.button}>
                 Sign Out
             </button>
+            <a className={styles.twitterButton}
+                href={`https://twitter.com/intent/tweet?text=${tweetMessage}`} target="_blank">
+                Tweet</a>
             <div className={styles.flexContainer}>
                 {hangLooses.map((u) => (
                     <a key={u.githubId} href={u.userUrl} target="_blank" className={styles.user}>
