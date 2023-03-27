@@ -23,6 +23,22 @@
   background-color: #999;
 }
 
+.githubLink {
+  background-color: #444;
+  padding: 0.5rem;
+  border-radius: 5px;
+  color: #f0f0f0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  font-family: Arial, sans-serif;
+}
+
+.githubLink:hover {
+  background-color: #363535;
+  transition: background-color 0.5s;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .main {
     flex-direction: column;
