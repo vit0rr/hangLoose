@@ -67,3 +67,20 @@
 .button:hover {
   background-color: #666;
 }
+
+.twitterButton {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  background-color: #1da1f2;
+  color: #f0f0f0;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 10px;
+}
+
+.twitterButton:hover {
+  background-color: #1da0f2d8;
+}
