@@ -15,7 +15,7 @@ export const authOptions = {
         // @ts-ignore
         async signIn({ profile }) {
             await connectMongo();
-            const {name, avatar_url, html_url, email, id } = profile;
+            const { name, avatar_url, html_url, email, id } = profile;
             await connectMongo();
             try {
                 let user = await UserModel.findOne({ githubId: id });
@@ -29,12 +29,21 @@ export const authOptions = {
                         hasHangloose: true,
                     });
                 }
+
+                await UserModel.findOneAndUpdate({
+                    githubId: id,
+                }, {
+                    name,
+                    avatar: avatar_url,
+                    email: email ? email : id + " do not have email",
+                    userUrl: html_url,
+                })
                 return true;
             } catch (error) {
                 console.log(error);
                 return false;
             }
-         },
+        },
     },
     secret: process.env.SECRET as string,
 }
