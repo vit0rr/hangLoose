@@ -30,22 +30,26 @@ export default function HangLoose({ hangLooses: hangLooses }: { hangLooses: Hang
     return (
         <main className={styles.main}>
             <h1 className={styles.h1}>Hang Looses</h1>
-            <ul className={styles.ul}>
+            <button onClick={() => signOut()} className={styles.button}>
+                Sign Out
+            </button>
+            <div className={styles.flexContainer}>
                 {hangLooses.map((u) => (
-                    <li key={u.githubId} className={styles.li}>
-                        <img src={u.avatar} className={styles.img} />
-                        {
-                            u.userUrl ? (
-                                <span><a href={u.userUrl} target={"_blank"} className={styles.a}>{u.name} </a> 🤙</span>
+                    <a key={u.githubId} href={u.userUrl} target="_blank" className={styles.user}>
+                        <div key={u.githubId}>
+                            <img src={u.avatar} className={styles.img} />
+                            {u.userUrl ? (
+                                <span className={styles.name}>{u.name} 🤙</span>
                             ) : (
-                                <span>{u.name} 🤙</span>
-                            )
-                        }
-                    </li>
+                                <span className={styles.name}>{u.name} 🤙</span>
+                            )}
+                        </div>
+                    </a>
                 ))}
-            </ul>
-            <button onClick={() => signOut()} className={styles.button}>Sign Out</button>
+            </div>
         </main>
+
+
     );
 }
 
