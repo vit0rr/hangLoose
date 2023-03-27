@@ -84,3 +84,14 @@
 .twitterButton:hover {
   background-color: #1da0f2d8;
 }
+
+@media only screen and (max-width: 600px) {
+  .flexContainer {
+  flex-direction: column;
+  }
+  
+  .user {
+  width: 100%;
+  margin: 0.5rem 0;
+  }
+  }
