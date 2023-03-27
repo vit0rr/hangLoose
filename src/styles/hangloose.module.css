@@ -38,8 +38,12 @@
 }
 
 .a {
-  color: #f0f0f0;
+  color: #2776dd;
   text-decoration: none;
+}
+
+.a:hover {
+  text-decoration: underline;
 }
 
 .button {
