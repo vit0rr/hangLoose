@@ -1,7 +1,4 @@
 .main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1rem;
   padding: 2rem;
   background-color: #121212;
   color: #f0f0f0;
@@ -11,39 +8,48 @@
 .h1 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  grid-column: 1/-1;
 }
 
-.ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.li {
-  margin: 1rem;
+.user {
+  width: calc(20% - 1rem);
+  margin: 0.5rem;
   background-color: #2c2c2c;
   padding: 1rem;
   border-radius: 5px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+  color: #f0f0f0;
+  text-align: center;
+}
+
+.user:hover {
+  background-color: #444;
+  transition: background-color 0.5s;
+  cursor: pointer;
 }
 
 .img {
-  width: 48px;
-  height: 48px;
-  margin-right: 1rem;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  object-fit: cover;
+  margin-bottom: 10px;
 }
 
-.a {
-  color: #2776dd;
-  text-decoration: none;
-}
-
-.a:hover {
-  text-decoration: underline;
+.name {
+  font-size: 18px;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .button {
@@ -56,7 +62,6 @@
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
-  grid-column: 1/-1;
 }
 
 .button:hover {
