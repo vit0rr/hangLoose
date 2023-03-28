@@ -28,9 +28,9 @@ export default function HangLoose({
 
   // Redirect to '/' if the user is not logged in.
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    /* if (status === 'unauthenticated') {
         router.push('/');
-    }
+    } */
   }, [status, router]);
 
   return (
@@ -38,6 +38,7 @@ export default function HangLoose({
       <h1 className={styles.h1}>
         <a href="https://github.com/vit0rr/hangLoose" target="_blank">Hang Looses</a> 🤙
       </h1>
+      <p className={styles.credits}>Made by <a href="https://github.com/vit0rr/" target="_blank">Vitor</a></p>
       <div className={styles.actionButtons}>
         <button onClick={() => signOut()} className={styles.button}>
           Sign Out
