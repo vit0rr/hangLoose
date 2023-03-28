@@ -13,6 +13,32 @@
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
+.h1 > a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.h1 > a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: #455EB5;
+  transition: all 0.3s ease-in-out;
+}
+
+.h1 > a:hover {
+  color: #455EB5;
+}
+
+.h1 > a:hover::after {
+  width: 100%;
+}
+
 .flexContainer {
   display: flex;
   flex-wrap: wrap;

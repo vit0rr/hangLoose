@@ -35,7 +35,9 @@ export default function HangLoose({
 
   return (
     <main className={styles.main}>
-      <h1 className={styles.h1}>Hang Looses 🤙</h1>
+      <h1 className={styles.h1}>
+        <a href="https://github.com/vit0rr/hangLoose" target="_blank">Hang Looses</a> 🤙
+      </h1>
       <div className={styles.actionButtons}>
         <button onClick={() => signOut()} className={styles.button}>
           Sign Out
