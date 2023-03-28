@@ -28,9 +28,9 @@ export default function HangLoose({
 
   // Redirect to '/' if the user is not logged in.
   useEffect(() => {
-    /* if (status === 'unauthenticated') {
+    if (status === 'unauthenticated') {
         router.push('/');
-    } */
+    }
   }, [status, router]);
 
   return (
