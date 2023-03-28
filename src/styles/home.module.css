@@ -3,39 +3,66 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #1a1a1a;
   font-family: Arial, sans-serif;
+}
+
+.title {
+  font-size: 45px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .button {
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;
-  background-color: #666;
+  background: linear-gradient(
+    92.88deg,
+    rgb(69, 94, 181) 9.16%,
+    rgb(86, 67, 204) 43.89%,
+    rgb(103, 63, 215) 64.72%
+  );
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 40px;
   cursor: pointer;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, box-shadow 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .button:hover {
-  background-color: #999;
-}
-
-.githubLink {
   background-color: #444;
-  padding: 0.5rem;
-  border-radius: 5px;
-  color: #f0f0f0;
-  font-size: 1.2rem;
-  font-weight: bold;
-  font-family: Arial, sans-serif;
+  box-shadow: 0 0 30px #444;
 }
 
-.githubLink:hover {
-  background-color: #363535;
-  transition: background-color 0.5s;
+.sourceCode {
+  font-size: 14px;
+  color: white;
+  text-decoration: none;
+  margin-top: 20px;
+  transition: opacity 0.3s;
+  font-weight: bold;
+}
+
+.sourceCode a {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+}
+
+.sourceCode:hover {
+  opacity: 0.7;
   cursor: pointer;
 }
 

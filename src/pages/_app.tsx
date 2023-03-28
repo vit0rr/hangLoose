@@ -10,7 +10,6 @@ import GithubButton from '@/components/Github/GithubButton'
 export default function App({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
-      <GithubButton />
       <Head>
         <meta charSet="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />

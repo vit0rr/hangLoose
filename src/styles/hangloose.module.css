@@ -1,13 +1,16 @@
 .main {
   padding: 2rem;
-  background-color: #121212;
   color: #f0f0f0;
   font-family: Arial, sans-serif;
 }
 
 .h1 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: 45px;
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.2);
 }
 
 .flexContainer {
@@ -17,23 +20,37 @@
 }
 
 .user {
-  width: calc(20% - 1rem);
+  width: calc(25% - 1rem);
   margin: 0.5rem;
-  background-color: #2c2c2c;
+  background: linear-gradient(
+    92.88deg,
+    rgb(18, 20, 45) 9.16%,
+    rgb(18, 20, 45) 43.89%,
+    rgb(18, 20, 45) 64.72%
+  );
   padding: 1rem;
-  border-radius: 5px;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: #f0f0f0;
+  color: rgb(255, 255, 255);
   text-align: center;
+  transition: all 0.3s ease-in-out;
 }
 
 .user:hover {
-  background-color: #444;
-  transition: background-color 0.5s;
   cursor: pointer;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px var(--shadow-color);
+}
+
+.actionButtons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .img {
@@ -56,8 +73,8 @@
   padding: 10px 20px;
   font-size: 18px;
   font-weight: bold;
-  background-color: #444;
-  color: #f0f0f0;
+  background-color: var(--primary-glow);
+  color: var(--foreground-rgb);
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -87,11 +104,11 @@
 
 @media only screen and (max-width: 600px) {
   .flexContainer {
-  flex-direction: column;
+    flex-direction: column;
   }
-  
+
   .user {
-  width: 100%;
-  margin: 0.5rem 0;
+    width: 100%;
+    margin: 0.5rem 0;
   }
-  }
+}
