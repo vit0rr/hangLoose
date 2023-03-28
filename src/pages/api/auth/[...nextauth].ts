@@ -10,8 +10,10 @@ export const authOptions = {
             clientId: process.env.GITHUB_ID as string,
             clientSecret: process.env.GITHUB_SECRET as string,
             authorization: {
+                url: "https://github.com/login/oauth/authorize",
                 params: {
-                    scope: "read:user user:email"
+                    scope: "read:user", 
+                    client_id: process.env.GITHUB_ID,
                 }
             }
         }),
